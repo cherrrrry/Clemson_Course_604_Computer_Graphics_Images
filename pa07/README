@@ -1,0 +1,98 @@
+/*************************************************/
+/* Author name: Rui Chang                        */
+/* Email : rchang@g.clemson.edu                  */
+/* 604 project07                                 */
+/* Date: 2015-11-26                              */
+/*************************************************/
+
+1.Description
+	(1)Read image and store it in pixels, and store its channels;
+	    All the image data sturcture in this code is one-dimentional array.
+		Each pixel is float type. 
+	(2)Write pixels which are displaying.    
+	(3)Five kinds of image warping function:rotate,scale,translate,shear,twirl.
+        (4)Fix warp effect in  magnification using bilinear.
+           Fie warp effect in minification using supersampling(5*5).
+2.How to run code
+	(1)make it
+	(2)./warper inputfilename [writefilename]
+	   eg. ./warper malloy.jpg m.jpg
+	(3)Run five kinds of image warping function.
+           1.Rotate
+               >r
+	       >theta (eg.45)
+	       >d
+	   2.Scale
+	       >s
+               >sx (eg.0.5)
+               >sy (eg.0.8)
+               >d
+               note: sx and sy can not be 0
+	   3.Translate
+               >t
+               >dx (eg.100)
+               >dy (eg.200)
+               >d
+               note: the output image looks the same as input image
+           4.Shear
+               >s
+               >hx (eg.0.2)
+               >hy (eg.0.3)
+               >d
+               note: hx and hy can not be too large. Or it will beyond the screen can display.
+           5.Twril
+               >n
+               >s  (eg.3.75)
+               >cx (eg.0.5)
+               >cy (eg.0.5)
+               >d
+               note: cx and cy should be in (0,1]
+           6.Perspective
+               >p
+               >px (eg.0.002)
+               >py (eg.-0.001)
+           Can also run more than one warping function together.It is type the warp type and parameters and then another warping type and is function . 
+           At last, type d.
+         (4)key control
+               type w to write the displaying pixels in [writefilename].
+               type q to quit.
+               typer r to fix warp.When type r in fixing state,run normal mood.(you should wait several seconds to see the fix effects.)
+3. Functions
+	 (1)bool read()//read image and store in pixels
+         (2)bool write()// write image
+         (3)void displayImage()//for function call glutDisplayFunc(displayImage)
+         (4)void handleKey(unsigned char key,int x,int y)// handle write and quit
+         (5)void lowercase(char *s)//Convert the string s to lower case
+         (6)void Rotate(Matrix3x3 &M, float theta)//Multiply M by a rotation matrix of angle theta
+         (7)void Scale(Matrix3x3 &M, float sx, float sy)//Change M by a scale matrix of sx and sy
+         (8)void Translate(Matrix3x3 &M, int dx, int dy)//Change M by a translate matrix of dx and dy
+         (9)void Shear(Matrix3x3 &M, float hx, float hy)//Change M by a shear matrix of hx and hy
+         (10)float* Twirl(float s, float cx, float cy, float * inputPixels)//twirl the inputPixels and return outputPixels
+         (11)void processInput(Matrix3x3 &M)//Routine to build a projective transform from input text, display, or write transformed image to file
+         (12)float*  warpImage(Matrix3x3 &M, float * inputPixels)//use the warp matrix to inputPixels and return outputPixels
+         (13)float bilinearWarp(float * inputPixels,float u,float v,int k)//use bilinearWarp to fix magnification
+         (14)float supersample(float * inputPixels, Matrix3x3 &_invM,Vector3d& _pixelOut, int k)//fix both magnification and minification.This function calls bilinearWarp.
+5. State bytes
+          (1)bool twirlFlag
+             when twirlFlag == true, program using twirl warp
+             when twirlFlag == false, program using other warp
+          (2)bool fixWarp
+             when fixWarp == false, program runs normal warp
+             when fixWarp == true, program runs bilinear and supersample to fix warp effect. 
+6.Example result
+          (1) result.tif is the result of fix warp of construction.tif
+              ./warper construction.tif result.tif
+	      >p
+              >0.002
+              >-0.001
+              >d
+          (2) twirl.tif is the result of fix warp used to twirl construction.tif
+              ./warper construction.tif twirl.tif
+              >n
+              >3.75
+              >0.5
+              >0.5
+              >d
+
+
+		

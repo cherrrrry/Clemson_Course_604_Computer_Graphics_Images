@@ -1,0 +1,74 @@
+1. Project Description
+   This project is to implement one function of photoshop named layer blending.
+   When Giving two pictures, one is base picture and another is top picture,
+my program blend the two picture together in different mode. User can use command line to choose blending mode they want.
+   There are totally 15 kinds of different mode to choose from.
+   Test pictures I use is from the website:http://www.northlite.net/ps/blend.htm and I have already write result of all mode in my document /result examples. My result issame as the result of the website.  
+   This program will input two pictures and display the blending result.When you type "w", the displaying result picture will be write.
+2. Different Mode Introduction, and its command line.
+	(1)darken(-da)
+	   Darken compares each pixel value of the upper layer to its counterpart's pixel value of the lower layer and chooses the darker of the two to display.
+	(2)lighten(-li)
+		Lighten compares the two layers pixel for pixel and uses the lightest pixel value. No part of the image gets darker.
+	(3)multiply(-mu)
+		Multiply darkens the lower layer based on the darkenss of the upper layer. No part of the image will get lighter. Any applied tone darker than white darkens the lower layer.
+	(4)screen(-sc)
+		Screen brightens by lightning the lower layer based on the lightness of the upper layer. The result is always lighter, and makes it a good mode for correcting exposure in photos that are too dark.
+	(5)dissolve(-di)
+		Dissolve makes the lower layer take on the colors of the top layer, and how much depends on the opacity of the upper layer.
+	(6)overlay(-ov)
+		Overlay multiplies the light colors and screens the dark colors.
+	(7)hardlight(-hl)
+		Hard Light muliplies the dark colors and screens the light colors.
+	(8)colorDodge(-cd)
+		Color Dodge dodges the lower layer with the upper layer, resulting in a lighter image. No part of the image will be darkened.
+	(9)linearDodge(-ld)
+		Linear Dodge works like screen but with more intense results.
+	(10)colorBurn(-cb)
+		Color Burn burns in the color of the upper layer with the lower layer. No part of the image will get lighter.
+	(11)linearBurn(-lb)
+		Linear Burn works like multiply but the results are more intense.
+	(12)hue(-hu)
+		Hue changes the hue of the lower layer to the hue of the upper layer but leaves brightness and saturation alone.
+	(13)saturation(-sa)
+		Saturation changes the saturation of the lower layer to the hue of the upper layer but leaves brightness and hue alone.
+	(14)color(-co)
+		Color changes the hue and saturation of the lower layer to the hue and saturation of the upper layer but leaves luminosity alone.
+	(15)luminosity(-lu)
+		Luminosity changes the luminosity of the lower layer to the liminodity of the upper layer while leaving hue and saturation the same.
+
+3.How to Run Code
+	step1.make
+	step2.in command line, type the following:
+		  ./blend [mode] [top_image] [base_image] [output_image]
+		  eg. ./blend -cb top.jpg base.jpg out.jpg
+    step3.type "w" to write displaying picture into output_image 
+	step4.type "q" to quit.
+4.Data sturcture
+	All pixels are instored in one-dimensional array.
+5.Functions
+	(1)float* read(char* filename_read)// read image and store it in pixels	
+	(2)void RGBtoHSV(float r, float g, float b, float &h, float &s, float &v){//change RGB to HSV for one pixel
+	(3)void HSVtoRGB ( float h, float s, float v, float &r, float &g, float &b )//change HSV to RGB for one pixel
+	(4)bool imgRGBtoImgHSV(float *pixelSrc, float *pixelDes){//change RGB to HSV for whole image
+	(5)bool imgHSVtoImgRGB(float *pixelSrc, float *pixelDes){//change HSV to RGB for whole image
+	(6)float* darken(float* pixelTop, float* pixelBase,int width,int height,int channels){//darken mode (-da)
+	(7)float* lighten(float* pixelTop, float* pixelBase,int width,int height,int channels){//lighten mode (-li)
+	(8)float* multiply(float* pixelTop, float* pixelBase,int width,int height,int channels){//multiply mode (-mu)
+	(9)float* screen(float* pixelTop, float* pixelBase,int width,int height,int channels){//screen mode (-sc)i
+	(10)float* dissolve(float* pixelTop, float* pixelBase,int width,int height,int channels){//dissolve mode (-di)
+	(11)float* overlay(float* pixelTop, float* pixelBase,int width,int height,int channels){//overlay mode (-ol)
+	(12)float* hardlight(float* pixelTop, float* pixelBase,int width,int height,int channels){//hardlight mode (-hl)
+	(13)float* colorDodge(float* pixelTop, float* pixelBase,int width,int height,int channels){//colorDodge mode (-cd)
+	(14)float* linearDodge(float* pixelTop, float* pixelBase,int width,int height,int channels){//linearDodge mode (-ld)
+	(15)float* colorBurn(float* pixelTop, float* pixelBase,int width,int height,int channels){//colorBurn mode (-cb)
+	(16)float* linearBurn(float* pixelTop, float* pixelBase,int width,int height,int channels){//linearBurn mode (-lb)
+	(17)float* saturation(float* pixelTop, float* pixelBase,int width,int height,int channels){//saturation mode (-sa)
+	(18)float* hue(float* pixelTop, float* pixelBase,int width,int height,int channels){//hue mode (-hu)
+	(19)float* color(float* pixelTop, float* pixelBase,int width,int height,int channels){//color mode (-co)
+	(20)float* luminosity(float* pixelTop, float* pixelBase,int width,int height,int channels){//luminosity mode(-lu)
+	(21)bool write()// write image
+	(22)void displayImage(){ //for function call glutDisplayFunc(displayImage); 
+	(23)void copy(float* pixelSrc, float* pixelDes, int width, int height, int channels){//copy image from pixelSrc to pixelDes
+	(24) void handleKey(unsigned char key,int x,int y){// handle write and quit
+	(25)int main(int argc, char** argv)

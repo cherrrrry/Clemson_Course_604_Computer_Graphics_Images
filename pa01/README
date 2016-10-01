@@ -1,0 +1,45 @@
+Author name : Rui Chang
+Email : rchang@g.clemson.edu
+Description: 
+	1.read 3channel RGB image and 4channel RGBA image 
+	2.display image
+	3.manipulate the image, flip image and display it
+	4.display image in single channel using its grayscale image
+        5.grab the image displaying on screen and write 
+How to run code:
+	step1.first make it
+	step2.in terminal, type 
+	      ./oiioview [target_input_image_name] [target_output_image_name] 
+	      eg.  ./oiioview teapot.jpg teapot_write.jpg
+    step3.keyboard manipulation
+		  f: horizontally flip
+		  i: vertically flip
+		  r: only display red channel grey scale image
+		  g: only display green channel grey scale image
+		  b: only display blue channel grey scale image
+		  o: back to normal display mode
+          q: quit
+          w: write displaying image in [target_output_image_name]
+Data structure:
+	one-dimensional array
+Functions:
+	(1)read
+		bool read(void);
+	(2)write
+		bool write(void);
+	(3)display
+		void displayImage();
+		glutDisplayFun(displayImage);
+	(4)manipulation
+		void handleKey(unsigned char key,int x,int y);
+        void horizonFlip();
+        void verticalFlip();
+	(5)display in single channel
+      	void save_greyscale_pixels();
+		//in this function, store image in every single channel
+		to implement it also use 
+		void handleKey(unsigned char key,int x,int y);
+		void displayImage();
+
+
+		       

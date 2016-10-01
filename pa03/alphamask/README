@@ -1,0 +1,44 @@
+Author name : Rui Chang
+Email : rchang@g.clemson.edu
+
+Description:
+	1.Read image, if channels is 3 change it to 4.
+	2.change image from RGBA to HSV
+	3.greenscreen : if hue is near 120 change a to 0. Which means change the forth channel of pixel of RGBA image to zero.
+	4.change other parameter such as S and V to make greenscreen better.
+	5.set -pv function to implement petroVlahos. if you tap up or down it can change value of parameter k and show different effects.every time you change k, the program will store new image to target output image.
+	6.set -ss function to implement spill supression.
+	7.display image and write the output image.
+
+
+How to run the code:
+	in terminal:
+	1:make it
+	2:for greenscale you type    ./alphamask [target_input_img] [output_img_name]
+	  for petroVlahos you type   ./alphamask -pv [target_input_img] [output_img_name]
+			then type up or down to change k
+			type q to quit
+	  for spill supression you type ./alphamask -ss [target_input_img] [output_img_name]
+	  the [output_img_name] should support 4channel image.
+	  
+
+Functions:
+	1.read 
+	  bool read()
+	2.write
+	  bool write()
+	3.RGBtoHSV  //for pixel
+	  void RGBtoHSV(int r, int g, int b, double &h, double &s, double &v)
+	4.imgRGBtoImgHSV //for image
+	  bool imgRGBtoImgHSV(unsigned char *p1,double *p2)
+	5.threeToFour //change channels from 3 to 4
+	  void threeToFour(unsigned char *p1,unsigned char *p2)
+	6.void displayImage()
+	7.void handleKey(unsigned char key,int x,int y)
+	8.void greenscale(double *p1,unsigned char *p2)
+	9.void petroVlahos(unsigned char *p1,unsigned char *p2)
+	10.void spillSupression(unsigned char *p1)
+	11. void specialKeyHandle(int key,int x,int y)
+
+
+

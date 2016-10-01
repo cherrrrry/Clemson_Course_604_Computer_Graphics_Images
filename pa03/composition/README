@@ -1,0 +1,15 @@
+Author name : Rui Chang
+Email : rchang@g.clemson.edu
+Description:
+	this program is to composite to image together
+How to run the code:
+	in terminal :
+	1.make it
+	2. type ./composition [foreground_img_name] [background_img _name] [output_img_name]
+Functions:
+	1.unsigned char* read(char *filename_read)
+	2.bool write()
+	3.void threeToFour(unsigned char *p1,unsigned char *p2)
+	4.void composition(unsigned char* pf,unsigned char *pb,unsigned char *po)
+
+		
